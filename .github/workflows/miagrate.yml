@@ -20,14 +20,12 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
-      - name:    
-Set up Git credentials
+      - name: Set up Git credentials
         run: |
           git config --global credential.helper '!aws codecommit credential-helper $@'
           git config --global credential.UseHttpPath true
 
-      - name:    
-Remove existing codecommit remote (if exists)
+      - name: Remove existing codecommit remote (if exists)
         run: git remote remove codecommit || true
 
       - name: Add codecommit remote
