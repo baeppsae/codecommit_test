@@ -25,13 +25,10 @@ jobs:
           git config --global credential.helper '!aws codecommit credential-helper $@'
           git config --global credential.UseHttpPath true
 
-      - name: Remove existing codecommit remote (if exists)
-        run: git remote remove codecommit || true
-
       - name: Add codecommit remote
         run: git remote add codecommit https://git-codecommit.${{ secrets.AWS_REGION }}.amazonaws.com/v1/repos/test-repo
 
       - name: Push to AWS CodeCommit
         run: |
           set -x
-          git push -f codecommit main
+          git push codecommit main
